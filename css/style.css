@@ -26,3 +26,10 @@
     width: 100%;
     height: 10vh;
 }
+
+@media (max-width: 400px){
+    .cssbody,.cssdisplay{
+        width: 100%;
+        height: 90vh;
+    }
+}
