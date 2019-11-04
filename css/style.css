@@ -1,0 +1,28 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 10px;
+}
+.cssbody,.cssdisplay{
+    width: 50%;
+    height: 90vh;
+    float: left;
+}
+.prefixname,.cssorg{
+    float: left;
+    width: 100%;
+    height: 50px;
+    display: block;
+}
+.cssorg{
+    height: calc( 100% - 50px );
+    overflow-y: auto;
+}
+.cssdisplay > pre > .css{
+    overflow-y: auto;
+}
+.btn{
+    width: 100%;
+    height: 10vh;
+}

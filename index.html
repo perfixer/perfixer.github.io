@@ -5,106 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Css Custom Prefixer</title>
-    <style>
-        *{
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-            font-size: 20px;
-        }
-        .cssbody,.cssdisplay{
-            width: 50%;
-            height: 100vh;
-            float: left;
-        }
-        
-        .prefixname,.cssorg{
-            float: left;
-            width: 100%;
-            height: 50px;
-            display: block;
-        }
-        .cssorg{
-            height: calc( 100% - 50px );
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="cssbody">
-        <input type="text" class="prefixname" placeholder="Put Prefix Name">
+        <input type="text" class="prefixname" placeholder="Put Prefix Name" disabled>
         <textarea class="cssorg" placeholder="Put Css"></textarea>
     </div>
-    
-    <textarea  class="cssdisplay" placeholder="Result"></textarea>
-    
+    <textarea class="cssdisplay"></textarea>
+    <button class="btn" onclick="changepre()">Change</button>
     
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
-    <script>
-
-        $('.cssorg').on('keyup input', _.debounce(function(){
-            var prefix = $('.prefixname').val();
-            var blues = $('.cssorg').val();
-            console.log(prefix);
-            console.log(blues);
-
-            prefixCssSelectors(blues , prefix);
-        },500));
-
-        // function changepre(){
-        //     var prefix = $('prefixname').val();
-        //     var blues = $('.cssorg').val();
-        //     prefixCssSelectors(blues , prefix);
-        // }
-
-        var prefixCssSelectors = function(rules, className) {
-            var classLen = className.length,
-            char, nextChar, isAt, isIn;
-            
-            // makes sure the className will not concatenate the selector
-            className += ' ';
-            
-            // removes comments
-            rules = rules.replace( /\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, '' );
-            
-            // makes sure nextChar will not target a space
-            rules = rules.replace( /}(\s*)@/g, '}@' );
-            rules = rules.replace( /}(\s*)}/g, '}}' );
-            
-            for (var i = 0; i < rules.length-2; i++) {
-                char = rules[i];
-                nextChar = rules[i+1];
-                
-                if (char === '@') isAt = true;
-                if (!isAt && char === '{') isIn = true;
-                if (isIn && char === '}') isIn = false;
-                
-                if (
-                !isIn &&
-                nextChar !== '@' &&
-                nextChar !== '}' &&
-                (
-                char === '}' ||
-                char === ',' ||
-                ((char === '{' || char === ';') && isAt)
-                )
-                ) {
-                    rules = rules.slice(0, i+1) + className + rules.slice(i+1);
-                    i += classLen;
-                    isAt = false;
-                }
-            };
-            
-            // prefix the first select if it is not `@media` and if it is not yet prefixed
-            if (rules.indexOf(className) !== 0 && rules.indexOf('@') !== 0) rules = className+rules;
-            
-            $(".cssdisplay").append(rules);
-        }
-        
-    </script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <script src="js/beautiful.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
